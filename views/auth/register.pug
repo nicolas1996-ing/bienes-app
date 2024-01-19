@@ -9,19 +9,32 @@ block contenido
         //- form
         div(class="flex justify-center mx-auto max-w-md mt-10 w-1/2")
             div(class="bg-white p-4 shadow rounded-xl w-full")
-                form(class="flex gap-3 flex-col")
+                //- endpoint .../auth/register method POST 
+                form(class="flex gap-3 flex-col" role="form" method="POST" action="/auth/register")
                     div
-                        label(class="block text-gray-700 text-sm font-bold mb-2" for="nombre") Nombre
-                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nombre" type="text" placeholder="Nombre")
+                        label(class="block text-gray-700 text-sm font-bold mb-2" for="firstName") Nombre
+                        //- el attr name es el que se va a enviar en el body de la peticion: {... firstName: 'valor-input' ...}
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstName" name="firstName" type="text" placeholder="Nombre")
+                    
+                    div 
+                        label(class="block text-gray-700 text-sm font-bold mb-2" for="lastName") Apellido
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastName" name="lastName" type="text" placeholder="Apellido")
+                    
+                    div 
+                        label(class="block text-gray-700 text-sm font-bold mb-2" for="phone") Celular
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="number" name="phone"  placeholder="Telefono")
+
                     div 
                         label(class="block text-gray-700 text-sm font-bold mb-2" for="email") Email
-                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Email")
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" name="email"  placeholder="Email")
                     div 
                         label(class="block text-gray-700 text-sm font-bold mb-2" for="password") password
-                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password")
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" name="password" placeholder="Password")
+                    
                     div                    
                         label(class="block text-gray-700 text-sm font-bold mb-2" for="password-confirm") confirm password
-                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password-confirm" type="password" placeholder="Confirm Password")
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password-confirm" type="password" name="passwordConfirm"  placeholder="Confirm Password")
+                   
                     div(class="flex text-sm justify-between items-center mb-8")
                         span 
                             a(class="font-semibold text-indigo-400 hover:text-indigo-500 cursor-pointer" href="./login") Do you have an account?

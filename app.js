@@ -15,6 +15,7 @@ const app = express(); // create express app
 (async () => {
   try {
     await db.authenticate();
+    db.sync(); // crea las tablas en la db ( si no existen )
     console.log("Connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error.message);
@@ -23,6 +24,7 @@ const app = express(); // create express app
 
 // midellewares
 app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // manejo de formularios
 app.use(cors()); // for cors
 
 // contenedor de archivos estaticos - carpeta publica

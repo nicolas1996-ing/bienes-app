@@ -23,6 +23,7 @@ Sequelice
     npm i sequelize mysql2 
     https://dev.mysql.com/downloads/mysql/  => servidor 
     https://dev.mysql.com/downloads/workbench/ => interfaz grafica 
+    https://sequelize.org/docs/v6/ => documentación
 
 comandos básico terminal sql 
     

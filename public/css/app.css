@@ -537,6 +537,10 @@ video {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
 }
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -577,6 +581,9 @@ video {
 }
 .items-center {
   align-items: center;
+}
+.justify-end {
+  justify-content: flex-end;
 }
 .justify-center {
   justify-content: center;
@@ -640,6 +647,9 @@ video {
 .text-center {
   text-align: center;
 }
+.text-end {
+  text-align: end;
+}
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -655,6 +665,10 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 .font-bold {
   font-weight: 700;

@@ -5,7 +5,7 @@ import { Sequelize } from "sequelize";
 //  process.env.DB_PASSWORD: ya no es necesario usar el paquete dotenv
 const db = new Sequelize("bienes-raices", "root", process.env.DB_PASSWORD, {
   host: process.env.DB_HOST || "localhost", 
-  port: process.env.DB_PORT || 3306,
+  port: process.env.DB_PORT  || 3306,
   dialect: "mysql",
   // agregar estampas de tiempo a cada nuevo registro
   define: {
