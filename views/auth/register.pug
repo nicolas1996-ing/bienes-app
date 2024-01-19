@@ -1,0 +1,34 @@
+extends  ../layout/index
+block contenido
+    div(class="p-10")
+        //- view es una variable que se pasa desde el controlador
+        h1(class="text-4xl my-5 font-extrabold text-center capitalize") Bienes
+            span(class="font-normal") Raices
+        h2(class="text-indigo-600 font-bold text-center capitalize text-xl")=view
+
+        //- form
+        div(class="flex justify-center mx-auto max-w-md mt-10 w-1/2")
+            div(class="bg-white p-4 shadow rounded-xl w-full")
+                form(class="flex gap-3 flex-col")
+                    div
+                        label(class="block text-gray-700 text-sm font-bold mb-2" for="nombre") Nombre
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nombre" type="text" placeholder="Nombre")
+                    div 
+                        label(class="block text-gray-700 text-sm font-bold mb-2" for="email") Email
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Email")
+                    div 
+                        label(class="block text-gray-700 text-sm font-bold mb-2" for="password") password
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password")
+                    div                    
+                        label(class="block text-gray-700 text-sm font-bold mb-2" for="password-confirm") confirm password
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password-confirm" type="password" placeholder="Confirm Password")
+                    div(class="flex text-sm justify-between items-center mb-8")
+                        span 
+                            a(class="font-semibold text-indigo-400 hover:text-indigo-500 cursor-pointer" href="./login") Do you have an account?
+                        span
+                            a(class="font-semibold text-indigo-400 hover:text-indigo-500 cursor-pointer" href="./recovery-password") forgot password
+
+                    div(class="my-3")
+                        button(class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" type="submit") Registrarse
+                        
+

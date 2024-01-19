@@ -7,13 +7,30 @@ import express, { json } from "express";
 import authRouter from "./routes/auth.route.js";
 import { paths } from "./constants/endpoints.path.js";
 import cors from "cors";
+import db from "./database/db.js";
 
 const app = express(); // create express app
 
+// conexión a la base de datos
+(async () => {
+  try {
+    await db.authenticate();
+    console.log("Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error.message);
+  }
+})();
+
 // midellewares
-app.use(st("public")); // static files localhost:3000/
 app.use(express.json()); // for parsing application/json
 app.use(cors()); // for cors
+
+// contenedor de archivos estaticos - carpeta publica
+app.use(express.static("public"));
+
+// habilitar pug - vista de nuestra app - npm i pug
+app.set("view engine", "pug");
+app.set("views", "./views");
 
 // routes
 app.use(paths.auth.path, authRouter);

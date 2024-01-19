@@ -1,0 +1,32 @@
+//- # id 
+//- (name='name') clases 
+
+//- extender el contenido del layout ppal 
+extends  ../layout/index
+block contenido
+    div#login.p-10
+        h1.text-4xl.my-5.font-extrabold.text-center Bienes
+            span.font-normal Raices
+
+        //- logica dentro del html 
+        //- if authenticate
+        //-     p.text-center.text-orange-200 usuario autenticado 
+        //-     span= authenticate
+        //- else 
+        //-     p Inicie sesion para continuar
+        
+        div(class="flex justify-center mx-auto max-w-md mt-10 w-1/2")
+            div(class="bg-white p-4 shadow rounded-xl w-full")
+                form(class="flex gap-3 flex-col")
+                    div 
+                        label(class="block text-gray-700 text-sm font-bold mb-2" for="email") Email
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Email")
+                    div 
+                        div(class="flex items-center justify-between")
+                            label(class="block text-gray-700 text-sm font-bold mb-2" for="password") password
+                            div(class="text-sm")
+                                a(class="font-semibold text-indigo-600 hover:text-indigo-500 cursor-pointer" href="./recovery-password") forgot password?
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password")
+                    div(class="my-3")
+                        button(class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" type="submit") Registrarse
+                        
