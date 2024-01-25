@@ -29,3 +29,11 @@ comandos básico terminal sql
 
 validaciones 
     npm i express-validator
+
+hash passwords 
+    npm i bcrypt 
+
+envio de emails 
+    nodemailer: enviar emails 
+    mailtrap: probar emails - Email Delivery Platform that delivers just in time. - https://mailtrap.io/home
+    npm i nodemailer

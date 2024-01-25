@@ -1,6 +1,8 @@
 // export por default no necesita el uso de { }, pero si necesita el uso de la extención del archivo (.js)
 import { check, validationResult } from "express-validator";
 import User from "../models/Users.js";
+import { idGenerator } from "../helpers/token.js";
+import { confirmAccount } from "../helpers/email.js";
 
 // controladores - renderizar vistas de autenticacion
 export const loginForm = async (req, res) => {
@@ -65,7 +67,7 @@ export const registerFormController = async (req, res) => {
       return res.render("auth/register", {
         success: false,
         view: "create an account",
-        errors: [{ msg: "email is already in database" }],
+        errors: [{ msg: `email: ${req.body.email} is already in database` }],
         user: {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
@@ -75,14 +77,20 @@ export const registerFormController = async (req, res) => {
       });
     }
 
+    // hash del password en el user.model
     // save user in the db
-    const newUser = await User.create(req.body);
-    res.status(201).json({
+    const newUser = await User.create({ ...req.body, token: idGenerator() });
+
+    // send confirmation email
+    const { password, confirmed, updatedAt, createdAt, ...user } =
+      newUser.dataValues;
+    confirmAccount(user);
+
+    res.render("templates/message", {
       success: true,
-      message: "registerFormController",
-      body: req.body,
-      newUser,
-      validationsErrorsForm,
+      view: "create an account",
+      message:
+        "user has been created successfully, check your email to confirm your account",
     });
   } catch (error) {
     console.log(error);
