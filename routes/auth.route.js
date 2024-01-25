@@ -23,7 +23,7 @@ router.post("/login", [], login);
 router.get("/login", loginForm);
 
 router.get("/register", registerFormView); // vista de registro
-router.post("/register", registerFormController); // logica de registro
+router.post("/register", [], registerFormController); // logica de registro
 
 router.get("/recovery-password", recoveryPassword);
 

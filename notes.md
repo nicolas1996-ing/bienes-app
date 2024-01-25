@@ -26,4 +26,6 @@ Sequelice
     https://sequelize.org/docs/v6/ => documentación
 
 comandos básico terminal sql 
-    
+
+validaciones 
+    npm i express-validator

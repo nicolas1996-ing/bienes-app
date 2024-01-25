@@ -6,6 +6,11 @@ block contenido
             span(class="font-normal") Raices
         h2(class="text-indigo-600 font-bold text-center capitalize text-xl")=view
 
+        if errors
+            each err in errors 
+                div(class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-1 text-xs" role="alert")
+                    strong(class="font-bold p-2") Error!
+                    code(class="block sm:inline")=err.msg 
         //- form
         div(class="flex justify-center mx-auto max-w-md mt-10 w-1/2")
             div(class="bg-white p-4 shadow rounded-xl w-full")
@@ -14,19 +19,19 @@ block contenido
                     div
                         label(class="block text-gray-700 text-sm font-bold mb-2" for="firstName") Nombre
                         //- el attr name es el que se va a enviar en el body de la peticion: {... firstName: 'valor-input' ...}
-                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstName" name="firstName" type="text" placeholder="Nombre")
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstName" name="firstName" type="text" placeholder="Nombre" value=user && user.firstName ? user.firstName : "")
                     
                     div 
                         label(class="block text-gray-700 text-sm font-bold mb-2" for="lastName") Apellido
-                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastName" name="lastName" type="text" placeholder="Apellido")
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastName" name="lastName" type="text" placeholder="Apellido" value=user && user.lastName ? user.lastName : "")
                     
                     div 
                         label(class="block text-gray-700 text-sm font-bold mb-2" for="phone") Celular
-                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="number" name="phone"  placeholder="Telefono")
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="number" name="phone"  placeholder="Telefono" value=user && user.phone ? user.phone : "")
 
                     div 
                         label(class="block text-gray-700 text-sm font-bold mb-2" for="email") Email
-                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" name="email"  placeholder="Email")
+                        input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" name="email"  placeholder="Email" value=user && user.email ? user.email : "")
                     div 
                         label(class="block text-gray-700 text-sm font-bold mb-2" for="password") password
                         input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" name="password" placeholder="Password")
