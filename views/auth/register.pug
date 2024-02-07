@@ -16,6 +16,8 @@ block contenido
             div(class="bg-white p-4 shadow rounded-xl w-full")
                 //- endpoint .../auth/register method POST 
                 form(class="flex gap-3 flex-col" role="form" method="POST" action="/auth/register")
+                    //- csrfToken es una variable que se pasa desde el controlador y su funcion es evitar ataques csrf 
+                    //- input(type="hidden" name="_csrf" value=csrfToken)
                     div
                         label(class="block text-gray-700 text-sm font-bold mb-2" for="firstName") Nombre
                         //- el attr name es el que se va a enviar en el body de la peticion: {... firstName: 'valor-input' ...}

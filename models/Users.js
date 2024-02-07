@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import db from "../database/db.js";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 
 /*
     creación del modelo 
@@ -45,5 +45,11 @@ const User = db.define(
     },
   }
 );
+
+// metodos personalizados asociados al modelo 
+// this no puede ser usado en arrow function
+User.prototype.validPassword = async function (password) {
+  return await bcrypt.compareSync(password, this.password);
+};
 
 export default User;
