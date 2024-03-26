@@ -65,3 +65,54 @@ Autenticar usuarios
         npm install jsonwebtoken
         - en el jwt.payload no se guarda información sensible ya que es desencriptable 
         - header ( firma ) + payload (contenido no sensible)
+
+mapas
+    -> añadir webpack para compilar archivos estaticos
+        - npm i -D webpack webpack-cli
+        - archivo de configuración: webpack.config.js -> recibe archivos sin compilar, retornar archivos compilados
+        - archivos sin compilar en: src/js
+            - entry -> archivos sin compilar 
+            - output -> archivos compilados
+        - carpeta donde se guardan los archivos compilados: public/js
+        - script para ejecutar los webpacks ->  { ... "js": "webpack --watch" ...}
+    - clase 70-
+    -> mostrar el mapa 
+        link en index.pug 
+        link en add-property.pug 
+        agregar script de mapa en: src/js/map.js 
+
+Ejecutar varios scripts al tiempo 
+    npm i -D concurrently
+
+Asociaciones en sequelize 
+    - hasOne 1:1
+        Ejemplos
+          - una propiedad tiene un vendedor
+          - un usuario tiene un perfil 
+          - un producto tiene una categoria 
+        Sintaxis 
+          - Product.hasOne(Category)
+            - Product tiene la fk que hace referencia al category ( Sequelize infiere esta fk en caso de no aplicarse)
+    - belongsTo 1:1 
+        Product.belongsTo(Category)
+    - hasMany 1:N
+        Ejemplos 
+            - Un Product puede estar relacionado en muchas Orders
+            - Un Vendedor puede tener multiples Propiedades 
+            - Un elemento puede existir en muchas tablas 
+            - Discount y DiscountItem 
+                - Un Discount puede estar asociado a multiples (N) DiscountItem 
+                - pero un DiscountItem puede estar asociado solo a un Discount
+        Sintaxis 
+            - Product.hasMany(Orders)
+            - Author.hasMany(Post)
+    - belongsToMany Muchos a muchos 
+        - en este tipo de relaciones es neceario el uso de una tabla pivote 
+        Ejemplos 
+            - Student puede tener multiples Subjects y
+            - Una Subject puede estar asociado a multiples Students 
+            - Tabla pivote: fk student + fk Subject 
+            
+
+
+

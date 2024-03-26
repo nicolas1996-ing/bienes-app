@@ -4,10 +4,12 @@
 import "dotenv/config";
 import { static as st } from "express";
 import express, { json } from "express";
-import authRouter from "./routes/auth.route.js";
 import { paths } from "./constants/endpoints.path.js";
 import cors from "cors";
 import db from "./database/db.js";
+import authRouter from "./routes/auth.route.js";
+import realStateRouter from "./routes/realState.route.js";
+
 // import cookieParser from "cookie-parser";
 // import csurf from "csurf";
 
@@ -40,6 +42,7 @@ app.set("views", "./views");
 
 // routes
 app.use(paths.auth.path, authRouter);
+app.use(paths.realState.path, realStateRouter);
 
 // init server
 const port = process.env.PORT || 3000;

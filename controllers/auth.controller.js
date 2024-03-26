@@ -96,14 +96,10 @@ export const loginFormController = async (req, res) => {
         httpOnly: true,
         secure: true,
       })
-      .status(201)
-      .json({
-        success: true,
-        message: "auth-router-work",
-        path: "/login",
-        body: req.body,
-        token,
-      });
+      .redirect("/real-state/my-admin-panel");
+
+      // redirect: redirecciona a la ruta especificada (endpoint)
+
   } catch (error) {
     console.log(error);
     res.status(400).json({
