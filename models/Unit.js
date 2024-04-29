@@ -42,7 +42,7 @@ const Unit = db.define("unit", {
   },
   image: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   public: {
     type: DataTypes.BOOLEAN,

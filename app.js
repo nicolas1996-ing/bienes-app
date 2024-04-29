@@ -9,6 +9,7 @@ import cors from "cors";
 import db from "./database/db.js";
 import authRouter from "./routes/auth.route.js";
 import realStateRouter from "./routes/realState.route.js";
+import cookieParser from "cookie-parser";
 
 // import cookieParser from "cookie-parser";
 // import csurf from "csurf";
@@ -30,7 +31,7 @@ const app = express(); // create express app
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // manejo de formularios
 app.use(cors()); // for cors
-// app.use(cookieParser()); // for csrf
+app.use(cookieParser()); // Configuración de cookie-parser
 // app.use(csurf({ cookie: true })); // for csrf
 
 // contenedor de archivos estaticos - carpeta publica

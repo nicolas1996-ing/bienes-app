@@ -1,7 +1,9 @@
 import db from "../database/db.js"; // instancia de la conexión a la base de datos
+import User from "../models/Users.js";
 import { Category, Price } from "../models/index.js";
 import categories from "./cateogories.js";
 import prices from "./prices.js";
+import { users } from "./users.js";
 
 const uploadSeedData = async () => {
   try {
@@ -14,6 +16,7 @@ const uploadSeedData = async () => {
     await Promise.all([
       Category.bulkCreate(categories),
       Price.bulkCreate(prices),
+      User.bulkCreate(users),
     ]);
     console.log("Seed data uploaded successfully");
     return;
@@ -32,6 +35,7 @@ const deleteSeedData = async () => {
     await Promise.all([
       Category.destroy({ where: {}, truncate: true }),
       Price.destroy({ where: {}, truncate: true }),
+      User.destroy({ where: {}, truncate: true }),
     ]);
 
     console.log("Seed data deleted successfully");
@@ -62,4 +66,9 @@ if (process.argv[2] === "-drop") dropDatabase();
     argv[0] = node
     argv[1] = ./seed/seed.js
     argv[2] = -upload
+
+    eliminar datos bd 
+      node ./seed/seed.js -drop
+    cargar seed data
+      node ./seed/seed.js -upload
 */

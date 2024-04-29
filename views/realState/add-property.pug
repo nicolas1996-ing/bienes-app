@@ -9,28 +9,33 @@ block contenido
         h1.text-4xl.my-5.font-extrabold.text-center Bienes
             span.font-normal Raices
         h2(class="text-center text-2xl font-bold") Crear propiedad
+    if errors
+            each err in errors 
+                div(class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative m-3 text-xs" role="alert")
+                    strong(class="font-bold p-2") Error!
+                    code(class="block sm:inline")=err.msg 
     div(class="bg-white shadow py-8 px-4 rounded mx-auto max-w-2xl p-4")
-        form(class="flex flex-col")
+        form(class="flex flex-col" method="POST" action="/real-state/add-property")
             div(class="mb-6")
                 h3(class="text-lg font-semibold") Informacion general
                 p(class="text-sm text-gray-500") Añade información sobre la propiedad que quieres vender
             div(class="my-3")
                 label(class="block text-gray-700 text-sm font-bold mb-2" for="title") Titulo del anuncio
-                input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" name="title" type="text" placeholder="casa frente a la playa")
+                input(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" name="title" type="text" placeholder="casa frente a la playa" value=data.title ? data.title : "")
             div
                 label(class="block text-gray-700 text-sm font-bold mb-2" for="description") Descripción de la propiedad
-                textarea(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" name="description" placeholder="casa frente a la playa")
+                textarea(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" name="description" placeholder="casa frente a la playa" )=data.description ? data.description : ""
             div(class="md:flex md:gap-4")   
                 div(class="my-3 w-full md:w-1/2")
-                    label(class="block text-gray-700 text-sm font-bold mb-2" for="category") Categoria
-                    select(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="category" name="category")
-                        each category in categories
-                            option(value=category._id)= category.name
+                    label(class="block text-gray-700 text-sm font-bold mb-2" for="categoryId") Categoria
+                    select(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categoryId" name="categoryId")
+                        each categoryId in categories
+                            option(value=categoryId.id selected=!!(data.categoryId && (data.categoryId == categoryId.id)))= categoryId.name
                 div(class="my-3 w-full md:w-1/2")
-                    label(class="block text-gray-700 text-sm font-bold mb-2" for="price") Precio
-                    select(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" name="price")
-                        each price in prices
-                            option(value=price)= price.name
+                    label(class="block text-gray-700 text-sm font-bold mb-2" for="priceId") Precio
+                    select(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="priceId" name="priceId")
+                        each priceId in prices
+                            option(value=priceId.id selected=!!(data.priceId && (data.priceId == priceId.id)))= priceId.name
             div(class="md:flex md:gap-4")   
                 div(class="my-3 w-full md:w-1/2")
                     label(class="block text-gray-700 text-sm font-bold mb-2" for="roomsNumber") Habitaciones
@@ -39,7 +44,7 @@ block contenido
                         //- javascript dentro de pug
                         - let counter = 1;
                             while counter <= 10
-                                option(value=counter) #{counter}
+                                option(value=counter selected=!!(data.roomsNumber && (data.roomsNumber == counter))) #{counter}
                                 - counter++;
                 div(class="my-3 w-full md:w-1/2")
                     label(class="block text-gray-700 text-sm font-bold mb-2" for="parking") Estacionamientos
@@ -48,7 +53,7 @@ block contenido
                         //- javascript dentro de pug
                         - let parking = 1;
                             while parking <= 10
-                                option(value=parking) #{parking}
+                                option(value=parking selected=!!(data.parking && (data.parking == parking))) #{parking}
                                 - parking++;
                 div(class="my-3 w-full md:w-1/2")
                     label(class="block text-gray-700 text-sm font-bold mb-2" for="bathrooms") Baños
@@ -57,17 +62,19 @@ block contenido
                         //- javascript dentro de pug
                         - let bathrooms = 1;
                             while bathrooms <= 10
-                                option(value=bathrooms) #{bathrooms}
+                                option(value=bathrooms selected=!!(data.bathrooms && (data.bathrooms == bathrooms))) #{bathrooms}
                                 - bathrooms++;
-        div(class="border-gray-200 flex flex-col mb-6 gap-2")    
-            h3(class="text-lg font-semibold") Ubicación de la propiedad
-            p(class="text-sm text-gray-500") Ubica la propiedad en el mapa
-            div(id="mapa" class="h-96")
-            div 
-                p(id="street")
-            input(type="hidden" id="street" name="street")
-            input(type="hidden" id="lat" name="lat")
-            input(type="hidden" id="lng" name="lng")
+            div(class="border-gray-200 flex flex-col mb-6 gap-2")    
+                h3(class="text-lg font-semibold") Ubicación de la propiedad
+                p(class="text-sm text-gray-500") Ubica la propiedad en el mapa
+                div(id="mapa" class="h-96")
+                div 
+                    p(id="street")=data.street ? data.street : ""
+                input(type="hidden" name="street" value="street")
+                input(type="hidden" id="lat" name="lat" value=data.lat ? data.lat : "")
+                input(type="hidden" id="lng" name="lng" value=data.lng ? data.lng : "")
+                
+            button(class="w-full py-3 bg-indigo-400 hover:bg-indigo-500 text-white font-bold uppercase cursor-pointer" type="submit" value="crear-propiedad") Crear propiedad
 
 block scripts 
     //- alternativo a google maps = leaflet

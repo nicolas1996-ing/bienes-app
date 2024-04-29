@@ -2,6 +2,7 @@ import Unit from "./Unit.js";
 import Users from "./Users.js";
 import Category from "./Category.js";
 import Price from "./Price.js";
+import Sale from "./Sale.js";
 
 // relaciones
 
@@ -12,4 +13,4 @@ Unit.belongsTo(Price);
 Unit.belongsTo(Category);
 Unit.belongsTo(Users);
 
-export { Unit, Users, Category, Price };
+export { Unit, Users, Category, Price, Sale };

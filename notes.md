@@ -65,6 +65,7 @@ Autenticar usuarios
         npm install jsonwebtoken
         - en el jwt.payload no se guarda información sensible ya que es desencriptable 
         - header ( firma ) + payload (contenido no sensible)
+    4. el token se almacena en una cookie 
 
 mapas
     -> añadir webpack para compilar archivos estaticos
@@ -112,7 +113,18 @@ Asociaciones en sequelize
             - Student puede tener multiples Subjects y
             - Una Subject puede estar asociado a multiples Students 
             - Tabla pivote: fk student + fk Subject 
-            
+
+middleware 
 
 
+
+Proceso conexión bd con api 
+1. conexión: database/db.js
+2. creación del modelo en la bd 
+3. creación del modelo en api: models/Sale.js
+nota. Puede crear todo el modelo en api y al lanzar servidor se creará en bd 
+4. Hacer uso del modelo: models/Sale.js
+ejemplo const users = await Sale.findAll(); 
+aquí usamos el orm sequelize 
+findAll() es una función propia del orm 
 

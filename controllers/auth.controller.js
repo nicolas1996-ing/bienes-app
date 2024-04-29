@@ -5,6 +5,7 @@ import { idGenerator } from "../helpers/token.js";
 import { confirmAccount, forgotPassword } from "../helpers/email.js";
 import bcrypt from "bcrypt";
 import { generateJWT } from "../helpers/jwt.js";
+import Sale from "../models/Sale.js";
 
 export const getUsers = async (req, res) => {
   try {

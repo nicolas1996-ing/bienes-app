@@ -43,13 +43,23 @@ const User = db.define(
         user.password = await bcrypt.hashSync(user.password, salt, null);
       },
     },
+    scopes: {
+      deletePassword: {
+        attributes: {
+          exclude: ["password", "token", "confirmed", "createdAt", "updatedAt"],
+        },
+      },
+    },
   }
 );
 
-// metodos personalizados asociados al modelo 
+// metodos personalizados asociados al modelo
 // this no puede ser usado en arrow function
 User.prototype.validPassword = async function (password) {
   return await bcrypt.compareSync(password, this.password);
 };
 
 export default User;
+
+
+// scopes sirven paradefinir campos que no se quieren mostrar en una consulta a la db ( pueden haber varios )
