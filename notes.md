@@ -82,6 +82,10 @@ mapas
         link en add-property.pug 
         agregar script de mapa en: src/js/map.js 
 
+dropdown form 
+    https://www.dropzone.dev/
+    npm i dropzone@5.9.3
+
 Ejecutar varios scripts al tiempo 
     npm i -D concurrently
 

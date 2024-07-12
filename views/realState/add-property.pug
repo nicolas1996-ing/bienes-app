@@ -1,4 +1,4 @@
-extends  ../layout/index
+extends  ../layout/admin
 //- inicia aquí maps 
 block styles
     link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
@@ -70,7 +70,7 @@ block contenido
                 div(id="mapa" class="h-96")
                 div 
                     p(id="street")=data.street ? data.street : ""
-                input(type="hidden" name="street" value="street")
+                input(type="hidden" name="street" id="streetInp" value=data.street ? data.street : "")
                 input(type="hidden" id="lat" name="lat" value=data.lat ? data.lat : "")
                 input(type="hidden" id="lng" name="lng" value=data.lng ? data.lng : "")
                 

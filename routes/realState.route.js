@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  addImageView,
   addProperty,
   addPropertyController,
   getUnits,
@@ -11,7 +12,7 @@ import isThereAValidUser from "../middleware/isThereAValidUser.js";
 // ================== endpoints ==================
 const router = express.Router();
 router.get("/", [isThereAValidUser], getUnits);
-router.get("/my-admin-panel", myAdminPanel); // vista de mis propiedades
+router.get("/my-admin-panel", [isThereAValidUser], myAdminPanel); // vista de mis propiedades
 router.get("/add-property", [isThereAValidUser], addProperty); // vista de agregar propiedad
 router.post(
   "/add-property",
@@ -47,5 +48,8 @@ router.post(
   ],
   addPropertyController
 ); // controlador de agregar propiedad
+// =====================================
+router.get("/add-image/:unit_id", [isThereAValidUser], addImageView);
+// =====================================
 
 export default router; // exportamos el router

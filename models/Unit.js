@@ -1,13 +1,10 @@
 import { DataTypes } from "sequelize";
 import db from "../database/db.js";
+import Price from "./Price.js";
+import Category from "./Category.js";
+import { Users } from "./index.js";
 
 const Unit = db.define("unit", {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    allowNull: false,
-    primaryKey: true,
-  },
   title: {
     type: DataTypes.STRING(100),
     allowNull: false,
@@ -47,8 +44,13 @@ const Unit = db.define("unit", {
   public: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
-  },
+  }
 });
+
+// Define las asociaciones después de la definición de los atributos
+Unit.belongsTo(Price); // Asociación con Price
+Unit.belongsTo(Category); // Asociación con Category
+Unit.belongsTo(Users); // Asociación con Users
 
 export default Unit;
 /*

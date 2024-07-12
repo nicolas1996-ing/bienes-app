@@ -66,7 +66,6 @@ export const addPropertyController = async (req, res) => {
   try {
     // resultados validación por middleware
     const errors = validationResult(req);
-    console.log(req.body);
     if (!errors.isEmpty()) {
       return await renderAddProperty(req, res, errors, req.body);
     }
@@ -86,13 +85,13 @@ export const addPropertyController = async (req, res) => {
       lng,
     } = req.body;
 
+    // extraer el current user
+    const currentUser = req.user;
+
     // creación de la unidad
     const newUnit = await Unit.create({
       title,
       description,
-      priceId,
-      categoryId,
-      userId,
       roomsNumber,
       parking,
       bathrooms,
@@ -101,8 +100,45 @@ export const addPropertyController = async (req, res) => {
       lng,
     });
 
-    return res.json({ success: true, newUnit, body: req.body });
+    await newUnit.setPrice(+priceId);
+    await newUnit.setCategory(+categoryId);
+    await newUnit.setUser(+currentUser?.id);
+
+    // return res.json({ success: true, newUnit, body: req.body, currentUser });
+    return res.redirect(`/real-state/add-image/${newUnit.id}`); // endpoint para agregar imagenes
   } catch (error) {
+    console.log(error);
     errorResponse(req, res, error, "addProperty controller");
   }
 };
+
+// ----------------- start add image -----------------
+export const addImageView = async (req, res) => {
+  try {
+    const { unit_id } = req.params;
+
+    // validación 1. existencia en la bd
+    let unit = await Unit.findByPk(unit_id);
+    if (!unit) {
+      return res.redirect("/real-state/my-admin-panel");
+    }
+    unit = unit.dataValues;
+
+    // validación 2. propiedad no publicada
+    if (!unit.public) {
+      return res.redirect("/real-state/my-admin-panel");
+    }
+
+    // validación 3. propiedad pertenece al usuario actual
+    if (unit.userId.toString() !== req.user.id.toString()) {
+      return res.redirect("/real-state/my-admin-panel");
+    }
+
+    res.render(`realState/add-image`, { data: { ...unit } });
+  } catch (error) {
+    console.log(error);
+    errorResponse(req, res, error, "addImageView");
+  }
+};
+
+// ----------------- end add image -----------------

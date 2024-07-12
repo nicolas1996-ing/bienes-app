@@ -3,11 +3,13 @@
 
 const setFieldsInAddPropertyView = (position, address) => {
   const street = document.getElementById("street");
+  const streetInput = document.getElementById("streetInp");
   const latInput = document.getElementById("lat");
   const logInput = document.getElementById("lng");
   street.textContent = address ?? ""; // optional chaining
   latInput.value = position.lat;
   logInput.value = position.lng;
+  streetInput.value = address;
 };
 
 const geoCodeService = (position, marker) => {

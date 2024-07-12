@@ -12,6 +12,7 @@ const db = new Sequelize(
     host: process.env.DB_HOST || "localhost",
     port: process.env.DB_PORT || 3306,
     dialect: "mysql",
+    logging: console.log,
     // agregar estampas de tiempo a cada nuevo registro
     define: {
       timestamps: true,
